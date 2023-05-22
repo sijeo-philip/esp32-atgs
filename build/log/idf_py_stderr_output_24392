@@ -1,0 +1,1 @@
+ninja: error: 'D:/ESP32_Projects/ESP32_CAM_ATGS/components/wifi/connect.c', needed by 'esp-idf/wifi/CMakeFiles/__idf_wifi.dir/connect.c.obj', missing and no known rule to make it

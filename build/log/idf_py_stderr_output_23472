@@ -1,0 +1,9 @@
+CMake Error at C:/esp/esp-idf/tools/cmake/component.cmake:312 (message):
+  Include directory 'D:/ESP32_Projects/ESP32_CAM_ATGS/main/.
+  ../components/wifi' is not a directory.
+Call Stack (most recent call first):
+  C:/esp/esp-idf/tools/cmake/component.cmake:486 (__component_add_include_dirs)
+  main/CMakeLists.txt:1 (idf_component_register)
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed
