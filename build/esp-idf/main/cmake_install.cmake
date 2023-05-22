@@ -1,4 +1,4 @@
-# Install script for directory: D:/ESP32_Projects/ESP32_CAM_ATGS/main
+# Install script for directory: D:/ESP32_Projects/esp32-atgs/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

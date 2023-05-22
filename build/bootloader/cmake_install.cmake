@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader/esp-idf/cmake_install.cmake")
+  include("D:/ESP32_Projects/esp32-atgs/build/bootloader/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/ESP32_Projects/esp32-atgs/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

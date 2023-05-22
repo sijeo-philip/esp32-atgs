@@ -1,7 +1,0 @@
-[1/281] Performing build step for 'bootloader'
-FAILED: bootloader-prefix/src/bootloader-stamp/bootloader-build bootloader/bootloader.elf bootloader/bootloader.bin bootloader/bootloader.map D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src/bootloader-stamp/bootloader-build D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader/bootloader.elf D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader/bootloader.bin D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader/bootloader.map 
-cmd.exe /C "cd /D D:\ESP32_Projects\ESP32_CAM_ATGS\build\bootloader && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe --build ."
-ninja: error: loading 'build.ninja': The system cannot find the file specified.
-
-[2/281] Linking C static library esp-idf\esp_http_server\libesp_http_server.a
-ninja: build stopped: subcommand failed.

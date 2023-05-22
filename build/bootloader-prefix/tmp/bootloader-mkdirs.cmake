@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "C:/esp/esp-idf/components/bootloader/subproject"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/tmp"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src/bootloader-stamp"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src"
-  "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/tmp"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/src"
+  "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "D:/ESP32_Projects/ESP32_CAM_ATGS/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "D:/ESP32_Projects/esp32-atgs/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()
