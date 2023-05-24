@@ -23,6 +23,8 @@
         "esp_netif.h": "c",
         "sdkconfig.h": "c",
         "mdns.h": "c",
-        "cjson.h": "c"
+        "cjson.h": "c",
+        "esp_camera.h": "c",
+        "esp_intr_alloc.h": "c"
     }
 }

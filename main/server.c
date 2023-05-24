@@ -9,6 +9,25 @@
 #define TAG     "SERVER"
 
 
+static int client_session_id;
+static httpd_handle_t server = NULL;
+
+esp_err_t send_camera_data_ws(uint8_t* buf, size_t len){
+if(!client_session_id)
+{
+    ESP_LOGE(TAG, "no client session id");
+    return ESP_FAIL;
+}
+httpd_ws_frame_t ws_capture = {
+    .final = true,
+    .fragmented = false,
+    .len = len,
+    .payload = buf, 
+    .type = HTTPD_WS_TYPE_BINARY};
+    return httpd_ws_send_frame_async(server,client_session_id, &ws_capture);
+}
+
+
 static esp_err_t root_url_hit(httpd_req_t *req)
 {
     ESP_LOGI(TAG,"URL:%s", req->uri);
@@ -48,11 +67,31 @@ static esp_err_t on_post_wifi_config(httpd_req_t *req)
 
 static esp_err_t on_capture_web_socket_url(httpd_req_t *req)
 {
-    return 0;
+    client_session_id = httpd_req_to_sockfd(req);
+    if( req->method == HTTP_GET)
+        return ESP_OK;
+
+    httpd_ws_frame_t ws_pkt;
+    memset(&ws_pkt, 0, sizeof(httpd_ws_frame_t));
+    ws_pkt.type = HTTPD_WS_TYPE_TEXT;
+    ws_pkt.payload = malloc(1024);
+    httpd_ws_recv_frame(req, &ws_pkt, 1024);
+    ESP_LOGI(TAG, "WS Payload: %.*s\n", ws_pkt.len, ws_pkt.payload);
+    free(ws_pkt.payload);
+
+    char* response = "{\"connected\":1, \"packet type\":2}";
+    httpd_ws_frame_t ws_response = {
+        .final = true,
+        .fragmented = false,
+        .type = HTTPD_WS_TYPE_TEXT,
+        .payload = (uint8_t*)response,
+        .len = strlen(response)};
+    return httpd_ws_send_frame(req, &ws_response);
+    
 }
 
 void register_end_points( void ){
-    httpd_handle_t server = NULL;
+    
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
 
     ESP_LOGI(TAG, "Starting Server\n");

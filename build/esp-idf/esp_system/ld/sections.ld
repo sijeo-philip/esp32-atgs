@@ -380,8 +380,6 @@ SECTIONS
     _ext_ram_bss_start = ABSOLUTE(.);
 
     *(.ext_ram.bss .ext_ram.bss.*)
-    *libbt.a:(.bss .bss.*)
-    *libbt.a:(COMMON)
     *liblwip.a:(.bss .bss.*)
     *liblwip.a:(COMMON)
     *libnet80211.a:(.bss .bss.*)
@@ -402,6 +400,16 @@ SECTIONS
     *(EXCLUDE_FILE(*libbt.a *libbtdm_app.a *liblwip.a *libnet80211.a *libnimble.a *libpp.a) .bss EXCLUDE_FILE(*libbt.a *libbtdm_app.a *liblwip.a *libnet80211.a *libnimble.a *libpp.a) .bss.*)
     *(.dynbss .dynsbss .gnu.linkonce.b .gnu.linkonce.b.* .gnu.linkonce.sb .gnu.linkonce.sb.* .gnu.linkonce.sb2 .gnu.linkonce.sb2.* .sbss .sbss.* .sbss2 .sbss2.* .scommon .share.mem)
     *(EXCLUDE_FILE(*libbt.a *libbtdm_app.a *liblwip.a *libnet80211.a *libnimble.a *libpp.a) COMMON)
+    . = ALIGN(4);
+    _bt_bss_start = ABSOLUTE(.);
+    *libbt.a:(.bss .bss.*)
+    . = ALIGN(4);
+    _bt_bss_end = ABSOLUTE(.);
+    . = ALIGN(4);
+    _bt_common_start = ABSOLUTE(.);
+    *libbt.a:(COMMON)
+    . = ALIGN(4);
+    _bt_common_end = ABSOLUTE(.);
     . = ALIGN(4);
     _btdm_bss_start = ABSOLUTE(.);
     *libbtdm_app.a:(.bss .bss.*)

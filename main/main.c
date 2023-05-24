@@ -9,10 +9,81 @@
 #include "freertos/task.h"
 #include "esp_wifi.h"
 #include "server.h"
+#include "camera.h"
+#include "driver/gpio.h"
+#include <string.h>
 
 #define MAX_APs 20
 #define TAG "SCAN"
 
+#define BUTTON_PIN 3
+
+static esp_err_t button_init(void);
+static void button_handler (void *arg);
+static void take_photo(void *arg);
+
+static esp_err_t button_init( void ){
+  gpio_config_t ioConf;
+
+  ioConf.mode = GPIO_MODE_INPUT;
+  ioConf.pin_bit_mask = (1UL << BUTTON_PIN );
+  ioConf.intr_type = GPIO_INTR_POSEDGE;
+  ioConf.pull_up_en = 1;
+  esp_err_t err = gpio_config(&ioConf);
+  if( err != ESP_OK)
+  {
+    ESP_LOGI("GPIO", "ERROR configuring GPIO\n");
+    return err;
+  }
+  gpio_install_isr_service(0);
+  return gpio_isr_handler_add(BUTTON_PIN, button_handler, NULL);
+}
+
+
+/************************************************/
+static TickType_t next = 0;
+const TickType_t period = 2000 / portTICK_PERIOD_MS;
+
+static void IRAM_ATTR button_handler(void *arg)
+{
+    TickType_t now = xTaskGetTickCountFromISR();
+
+    if (now > next)
+    {
+        xTaskCreate(take_photo, "pic", configMINIMAL_STACK_SIZE * 5, NULL, 5, NULL);
+    }
+    next = now + period;
+}
+
+static void take_photo(void *arg)
+{
+  #if 0
+    ESP_LOGI("CAMERA", "Taking Picture\n");
+    camera_fb_t *pic = NULL;
+    static size_t picSize = 0;
+    ESP_ERROR_CHECK(camera_capture(pic));
+    picSize = pic->len;
+    uint8_t* cam_buff = malloc(picSize+1);
+    memcpy(cam_buff, pic->buf, pic->len);
+    esp_camera_fb_return(pic);
+    send_camera_data_ws(cam_buff, picSize);
+    free(cam_buff);
+    ESP_LOGI("CAMERA", "Finished Taking Picture!\n");
+    #endif
+    ESP_LOGI("CAMERA", "TAKING PICTURE\n");
+    camera_fb_t *fb = esp_camera_fb_get();
+    if (NULL == fb)
+    {
+     ESP_LOGE("CAMERA", "CAPTURE FAILED\n");
+    }
+    esp_err_t err = send_camera_data_ws(fb->buf, fb->len);
+    ESP_LOGI("CAMERA", "%s", esp_err_to_name(err));
+    esp_camera_fb_return(fb);
+    ESP_LOGI("CAMERA", "TAKEN PICTURE\n");
+    vTaskDelete(NULL);
+    
+}
+/************************************************/
 #if (SHOW_WIFI_SCAN_AP == 1)
 static char *getAuthModeName (wifi_auth_mode_t authMode){
     char *names[] = {"OPEN", "WEP", "WPA PSK", "WPA2 PSK", "WPA WPA2 PSK", "MAX"};
@@ -65,6 +136,9 @@ if(err != ESP_OK)
 {
    ESP_LOGE(WIFI_TAG, "Failed to Connect \n");
 }
+button_init();
+camera_init();
 start_mdns_service();
 register_end_points();
+
 }

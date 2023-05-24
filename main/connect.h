@@ -14,11 +14,11 @@
 #endif
 
 #ifndef DEFAULT_SSID
-#define DEFAULT_SSID   "Airtel_9902330851"
+#define DEFAULT_SSID   "Airtel_9819547337" /*"Airtel_9902330851"*/
 #endif
 
 #ifndef DEFAULT_PWD     
-#define DEFAULT_PWD     "air11964"
+#define DEFAULT_PWD     "air09096" /*"air11964"*/
 #endif 
 
 #ifndef DEFAULT_SCAN_METHOD

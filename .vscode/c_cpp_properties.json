@@ -17,7 +17,8 @@
                 "C:/esp/esp-idf/components/lwip/include/apps",
                 "C:/esp/esp-idf/components/esp_common/include",
                 "${workspaceFolder}/components/wifi",
-                "C:/esp/esp-idf/components/nvs_flash/include"
+                "C:/esp/esp-idf/components/nvs_flash/include",
+                "C:/esp/esp-idf/components/esp32-camera/driver/include"
             ],
             "browse": {
                 "path": [
