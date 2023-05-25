@@ -5,6 +5,6 @@
 
 void register_end_points(void);
 void start_mdns_service (void);
-esp_err_t send_camera_data_ws(uint8_t* buf, size_t len);
+esp_err_t send_camera_data_ws(const char* buf, size_t len);
 
 #endif

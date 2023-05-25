@@ -75,14 +75,3 @@ esp_err_t camera_init()
 }
 
 
-esp_err_t camera_capture(camera_fb_t *fb)
-{
-    ESP_LOGI(CAMERA_TAG, "TAKING PICTURE\n");
-    fb = esp_camera_fb_get();
-    if (NULL == fb)
-    {
-            ESP_LOGE(CAMERA_TAG, "CAPTURE FAILED\n");
-        return ESP_FAIL;
-    }
-    return ESP_OK;
-}

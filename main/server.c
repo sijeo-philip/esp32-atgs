@@ -5,6 +5,11 @@
 #include "esp_http_server.h"
 #include "cJSON.h"
 #include "mdns.h"
+#include "esp_wifi.h"
+#include "esp_camera.h"
+#include "nvs_flash.h"
+#include "connect.h"
+
 
 #define TAG     "SERVER"
 
@@ -12,7 +17,16 @@
 static int client_session_id;
 static httpd_handle_t server = NULL;
 
-esp_err_t send_camera_data_ws(uint8_t* buf, size_t len){
+
+void reset_wifi( void* params)
+{
+    vTaskDelay(1000/portTICK_PERIOD_MS);
+    esp_wifi_stop();
+    xSemaphoreGive(initSemaphore);
+    vTaskDelete(NULL);
+}
+
+esp_err_t send_camera_data_ws(const char* buf, size_t len){
 if(!client_session_id)
 {
     ESP_LOGE(TAG, "no client session id");
@@ -22,8 +36,8 @@ httpd_ws_frame_t ws_capture = {
     .final = true,
     .fragmented = false,
     .len = len,
-    .payload = buf, 
-    .type = HTTPD_WS_TYPE_BINARY};
+    .payload =(uint8_t*)buf, 
+    .type = HTTPD_WS_TYPE_TEXT};
     return httpd_ws_send_frame_async(server,client_session_id, &ws_capture);
 }
 
@@ -56,12 +70,72 @@ static esp_err_t root_url_hit(httpd_req_t *req)
     httpd_resp_send(req, string, strlen(string));
     free(string);
     #endif
-    //httpd_resp_sendstr(req, "Hello World!");
     return 0;
+}
+
+static esp_err_t on_camera_capture(httpd_req_t *req)
+{
+
+    ESP_LOGI("CAMERA", "TAKING PICTURE\n");
+    camera_fb_t *fb = esp_camera_fb_get();
+    if (NULL == fb)
+    {
+        ESP_LOGE("CAMERA", "CAPTURE FAILED\n");
+    }
+
+    httpd_resp_set_type(req, "image/jpeg");
+    httpd_resp_set_hdr(req, "Content-Disposition", "inline; filename=capture.jpg");
+    char* num = malloc(10);
+    httpd_resp_set_hdr(req, "Content-Length", itoa(fb->len, num, 10));
+    esp_err_t err = httpd_resp_send(req, (char*)fb->buf, fb->len);
+    free(num);
+    ESP_LOGI("CAMERA", "%s", esp_err_to_name(err));
+    esp_camera_fb_return(fb);
+    ESP_LOGI("CAMERA", "TAKEN PICTURE\n");
+    
+    return ESP_OK;
 }
 
 static esp_err_t on_post_wifi_config(httpd_req_t *req)
 {
+    ESP_LOGI(TAG, "URL %s was hit", req->uri);
+    char* buf = malloc(150);
+    memset(buf, '\0', sizeof(150));
+    wifi_config_t *wifiConfigSet = malloc(sizeof(wifi_config_t));
+    httpd_req_recv(req, buf, req->content_len);
+    cJSON *payload = cJSON_Parse(buf);
+    cJSON *ssid = cJSON_GetObjectItem(payload, "ssid");
+    if( cJSON_IsString(ssid) && (ssid->valuestring !=NULL))
+    {
+        strncpy((char*)wifiConfigSet->sta.ssid, ssid->valuestring, strlen(ssid->valuestring));
+        ESP_LOGI(TAG, "SSID : %s", ssid->string);
+    }
+    cJSON *password = cJSON_GetObjectItem(payload, "pass");
+    if( cJSON_IsString(password) && ( password->valuestring != NULL) )
+    {
+        strncpy((char*)wifiConfigSet->sta.password, password->valuestring, strlen(password->valuestring));
+        ESP_LOGI(TAG, "PASSWORD: %s", password->valuestring);
+    }
+    wifiConfigSet->sta.threshold.authmode = DEFAULT_AUTHMODE;
+    free(buf);
+    cJSON_Delete(payload);
+    nvs_handle_t wifiCredNVSHandle;
+    //Open the NVS
+    esp_err_t err = nvs_open(STORAGE_NAMESPACE, NVS_READWRITE, &wifiCredNVSHandle);
+    if (ESP_OK != err)
+    {
+        ESP_LOGI(NVS_TAG, "Could not Open NVS: %s\n", STORAGE_NAMESPACE);
+        return err;
+    }
+    err = nvs_set_blob(wifiCredNVSHandle, "wifiCred", (void*)wifiConfigSet, sizeof(wifi_config_t)+1);
+    if(ESP_OK != err)
+    {
+        ESP_LOGI(NVS_TAG, "Could not Write WifiCred to NVS: %s\n",esp_err_to_name(err));
+    }
+    free(wifiConfigSet);
+    httpd_resp_set_status(req, "200");
+    httpd_resp_send(req, NULL, 0);
+    xTaskCreate(reset_wifi, "reset wifi", 1024*2, NULL, 15, NULL);
     return 0;
 }
 
@@ -105,6 +179,7 @@ void register_end_points( void ){
         .method = HTTP_GET,
         .handler = root_url_hit,
     };
+
     httpd_register_uri_handler(server, &rootEndPointConfig);
 
     httpd_uri_t wifiEndPointConfig = {
@@ -121,6 +196,13 @@ void register_end_points( void ){
         .is_websocket = true,
     };
     httpd_register_uri_handler(server, &captureWebSocket);
+
+    httpd_uri_t cameraCapture = {
+        .uri = "/capture", 
+        .method = HTTP_GET, 
+        .handler = on_camera_capture,
+    };
+    httpd_register_uri_handler(server, &cameraCapture);
 }
 
 void start_mdns_service (void)

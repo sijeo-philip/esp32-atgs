@@ -4,6 +4,11 @@
 
 
 #include "esp_err.h"
+#include "esp_wifi.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/event_groups.h"
+#include "esp_event.h"
 
 #define NVS_TAG     "NVS"
 #define WIFI_TAG    "WIFI"
@@ -41,9 +46,7 @@
 #define STORAGE_NAMESPACE   "storage"
 #endif
 
-void wifi_init( void );
-esp_err_t wifi_connect_sta( int timeout );
-void wifi_connect_ap( const char* ssid, const char* pass );
-void wifi_disconnect( void );
+void wifi_init(void *params);
+extern SemaphoreHandle_t initSemaphore;
 
 #endif

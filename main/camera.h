@@ -6,9 +6,6 @@
 #include "esp_camera.h"
 
 esp_err_t camera_init();
-esp_err_t camera_capture(camera_fb_t *fb);
-
-
 
 
 #endif

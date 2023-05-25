@@ -22,6 +22,22 @@ static esp_err_t button_init(void);
 static void button_handler (void *arg);
 static void take_photo(void *arg);
 
+SemaphoreHandle_t connectionSemaphore;
+SemaphoreHandle_t initSemaphore;
+
+
+void on_connect( void *params )
+{
+  while(true)
+  {
+    if(xSemaphoreTake(connectionSemaphore, portMAX_DELAY))
+    {
+      start_mdns_service();
+      register_end_points();
+    }
+  }
+}
+
 static esp_err_t button_init( void ){
   gpio_config_t ioConf;
 
@@ -57,30 +73,9 @@ static void IRAM_ATTR button_handler(void *arg)
 
 static void take_photo(void *arg)
 {
-  #if 0
-    ESP_LOGI("CAMERA", "Taking Picture\n");
-    camera_fb_t *pic = NULL;
-    static size_t picSize = 0;
-    ESP_ERROR_CHECK(camera_capture(pic));
-    picSize = pic->len;
-    uint8_t* cam_buff = malloc(picSize+1);
-    memcpy(cam_buff, pic->buf, pic->len);
-    esp_camera_fb_return(pic);
-    send_camera_data_ws(cam_buff, picSize);
-    free(cam_buff);
-    ESP_LOGI("CAMERA", "Finished Taking Picture!\n");
-    #endif
-    ESP_LOGI("CAMERA", "TAKING PICTURE\n");
-    camera_fb_t *fb = esp_camera_fb_get();
-    if (NULL == fb)
-    {
-     ESP_LOGE("CAMERA", "CAPTURE FAILED\n");
-    }
-    esp_err_t err = send_camera_data_ws(fb->buf, fb->len);
-    ESP_LOGI("CAMERA", "%s", esp_err_to_name(err));
-    esp_camera_fb_return(fb);
-    ESP_LOGI("CAMERA", "TAKEN PICTURE\n");
-    vTaskDelete(NULL);
+  const char* response = "{\"packet\":3, \"capture\":true}";
+  send_camera_data_ws(response, strlen(response));
+  vTaskDelete(NULL);
     
 }
 /************************************************/
@@ -102,11 +97,14 @@ void initialize_nvs(void)
 
 
 
+
 void app_main(void)
 {
+  esp_log_level_set(TAG, ESP_LOG_DEBUG);
+  connectionSemaphore = xSemaphoreCreateBinary();
   initialize_nvs();
-  wifi_init();
-
+ 
+   
 #if (SHOW_WIFI_SCAN_AP == 1)
   wifi_scan_config_t scan_config = {
     .ssid = 0,
@@ -131,14 +129,11 @@ void app_main(void)
 printf("------------------------------------------------------------------\n");
 #endif
 
-esp_err_t err = wifi_connect_sta(10000);
-if(err != ESP_OK)
-{
-   ESP_LOGE(WIFI_TAG, "Failed to Connect \n");
-}
+
 button_init();
 camera_init();
-start_mdns_service();
-register_end_points();
+xTaskCreate(&wifi_init, "init comms", 1024*3, NULL, 10, NULL);
+xSemaphoreGive(initSemaphore);
+xTaskCreate(&on_connect, "handle comms", 1024*5, NULL, 5, NULL);
 
 }

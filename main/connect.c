@@ -18,18 +18,9 @@ const int DISCONNECTED = BIT1;
 
 static esp_netif_t *sta_netif;
 static esp_netif_t *ap_netif;
+static bool connection_status = false;
 
-static wifi_config_t defaultWifiConfig = {
-    .sta = {
-        .ssid = DEFAULT_SSID,
-        .password = DEFAULT_PWD,
-        .scan_method = DEFAULT_SCAN_METHOD,
-        .sort_method = DEFAULT_SORT_METHOD,
-        .threshold.rssi = DEFAULT_RSSI,
-        .threshold.authmode = DEFAULT_AUTHMODE,
-    },
-};
-
+SemaphoreHandle_t connectionSemaphore;
 
 static char *print_disconnection_error(wifi_err_reason_t reason)
 {
@@ -107,9 +98,7 @@ static char *print_disconnection_error(wifi_err_reason_t reason)
 }
 
 static void event_handler(void* arg, esp_event_base_t eventBase, int32_t eventID, void* eventData){
-    
-
-    if(eventBase == WIFI_EVENT)
+  if(eventBase == WIFI_EVENT)
     {
         switch (eventID)
         {
@@ -153,7 +142,7 @@ static void event_handler(void* arg, esp_event_base_t eventBase, int32_t eventID
     
 }
 
-
+#if 0
 static esp_err_t get_wifi_creds (wifi_config_t *p_WifiConfig)
 {
     esp_err_t err;
@@ -209,47 +198,31 @@ static esp_err_t get_wifi_creds (wifi_config_t *p_WifiConfig)
     ESP_LOGI(WIFI_TAG, "ssid: %s, password: %s, total bytes read: %d\n", p_WifiConfig->sta.ssid, p_WifiConfig->sta.password, wifiCredSize);
     return err;
 }
+#endif
 
-/* nvs have to initialized before calling this function */
-void wifi_init( void ){
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    wifi_init_config_t wifi_config = WIFI_INIT_CONFIG_DEFAULT();
-    ESP_ERROR_CHECK(esp_wifi_init(&wifi_config));
-    
-    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &event_handler, NULL));
-    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &event_handler, NULL));
-    ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
-
-}
-
-esp_err_t wifi_connect_sta( int timeout ){
+esp_err_t wifi_connect_sta( wifi_config_t *p_wifiConfig){
     wifiEvents = xEventGroupCreate();
-
+    esp_err_t err = ESP_OK;
 /*Initialize default station as network interface instance*/
     sta_netif = esp_netif_create_default_wifi_sta();
     assert(sta_netif);
 
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-    wifi_config_t *p_wifiConfig = (wifi_config_t*)malloc(sizeof(wifi_config_t));
-    memset(p_wifiConfig, '\0', sizeof(wifi_config_t));
-    esp_err_t ret = get_wifi_creds (p_wifiConfig);
-    if ( ESP_OK == ret ){
-        ESP_LOGI(WIFI_TAG, "Setting Wifi IF STA \n");
-        wifi_config_t set_wifi_config;
-        strncpy((char*)set_wifi_config.sta.ssid, (char*)p_wifiConfig->sta.ssid, sizeof(p_wifiConfig->sta.ssid));
-        strncpy((char*)set_wifi_config.sta.password, (char*)p_wifiConfig->sta.password, sizeof(p_wifiConfig->sta.password));
-        set_wifi_config.sta.threshold.authmode =  p_wifiConfig->sta.threshold.authmode;
+    err = esp_wifi_set_mode(WIFI_MODE_STA);
+    if ( ESP_OK != err )
+        return err;
+    ESP_LOGI(WIFI_TAG, "Setting Wifi IF STA \n");
+    wifi_config_t *set_wifi_config= malloc(sizeof(wifi_config_t));
+    memset(set_wifi_config, 0, sizeof(wifi_config_t));
+    strncpy((char*)set_wifi_config->sta.ssid, (char*)p_wifiConfig->sta.ssid, sizeof(p_wifiConfig->sta.ssid));
+    strncpy((char*)set_wifi_config->sta.password, (char*)p_wifiConfig->sta.password, sizeof(p_wifiConfig->sta.password));
+    set_wifi_config->sta.threshold.authmode =  p_wifiConfig->sta.threshold.authmode;
         
-        ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &set_wifi_config));
-    }
-    free(p_wifiConfig);
-    ESP_ERROR_CHECK(esp_wifi_start());
-    EventBits_t result = xEventGroupWaitBits(wifiEvents, CONNECTED_GOT_IP|DISCONNECTED, pdTRUE, pdFALSE, pdMS_TO_TICKS(timeout));
-    if ( result == CONNECTED_GOT_IP )
-        return ESP_OK;
-return -1;
+    err = esp_wifi_set_config(WIFI_IF_STA, &set_wifi_config);
+    free(set_wifi_config);
+       
+   
+return err;
 }
 
 void wifi_connect_ap( const char* ssid, const char* pass ){
@@ -264,8 +237,6 @@ void wifi_connect_ap( const char* ssid, const char* pass ){
     ap_netif = esp_netif_create_default_wifi_ap();
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
     ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &wifi_config));
-    ESP_ERROR_CHECK(esp_wifi_start());
-
 }
 
 void wifi_disconnect( void ){
@@ -274,4 +245,68 @@ void wifi_disconnect( void ){
     esp_wifi_stop();
     ESP_LOGI(WIFI_TAG, "***********DISCONNECTING COMPLETE*********");
 
+}
+
+
+void wifi_init(void *params)
+{
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    while(true)
+    {
+        if(xSemaphoreTake(initSemaphore, portMAX_DELAY))
+        {
+            esp_err_t err;
+            nvs_handle_t wifiCredNVSHandle;
+            //Open the NVS
+            err = nvs_open(STORAGE_NAMESPACE, NVS_READWRITE, &wifiCredNVSHandle);
+            if (ESP_OK == err)
+            {
+                size_t wifiCredSize = 0;
+    
+                err = nvs_get_blob(wifiCredNVSHandle, "wifiCred", NULL, &wifiCredSize);
+                if( err != ESP_OK )
+                {
+                    nvs_close(wifiCredNVSHandle);
+                    connection_status = false;
+                }
+                wifi_config_t *wifiConfigSet = malloc(wifiCredSize + sizeof(wifi_config_t));
+                memset(wifiConfigSet, '\0', wifiCredSize+sizeof(wifi_config_t));
+                if ( wifiCredSize > 0 )
+                {
+                    err = nvs_get_blob(wifiCredNVSHandle, "wifiCred", wifiConfigSet, &wifiCredSize);
+                    if (ESP_OK != err )
+                    {
+                        free(wifiConfigSet);
+                        nvs_close(wifiCredNVSHandle);
+                        connection_status = false;
+                    }
+                    else
+                    {
+                        connection_status = true;
+                        nvs_close(wifiCredNVSHandle);
+                        wifi_init_config_t wifi_config = WIFI_INIT_CONFIG_DEFAULT();
+                        ESP_ERROR_CHECK(esp_wifi_init(&wifi_config));
+                        ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &event_handler, NULL));
+                        ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &event_handler, NULL));
+                        ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
+                        err = wifi_connect_sta( wifiConfigSet );
+                        free(wifiConfigSet);
+                    }
+                }
+
+            }
+            if( ( connection_status == true) && (err == ESP_OK) )
+            {
+                ESP_ERROR_CHECK(esp_wifi_start());
+
+            }
+            else{
+                wifi_connect_ap("TARGET_SYSTEM","nopassword");
+                ESP_ERROR_CHECK(esp_wifi_start());
+            }
+            xSemaphoreGive(connectionSemaphore);        
+        }
+    }
 }
