@@ -176,7 +176,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Custom command for CMakeFiles\menuconfig
 
 build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_ENV_FPGA= --dont-write-deprecated --output config D:/ESP32_Projects/esp32-atgs/sdkconfig && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/check_term.py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E env COMPONENT_KCONFIGS_SOURCE_FILE=D:/ESP32_Projects/esp32-atgs/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=D:/ESP32_Projects/esp32-atgs/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=D:/ESP32_Projects/esp32-atgs/sdkconfig IDF_TARGET=esp32 IDF_ENV_FPGA= c:/esp/tools/Espressif/python_env/idf5.0_py3.8_env/Scripts/python.exe -m menuconfig C:/esp/esp-idf/Kconfig && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_ENV_FPGA= --output config D:/ESP32_Projects/esp32-atgs/sdkconfig"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_ENV_FPGA= --dont-write-deprecated --output config D:/ESP32_Projects/esp32-atgs/sdkconfig && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/check_term.py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E env COMPONENT_KCONFIGS_SOURCE_FILE=D:/ESP32_Projects/esp32-atgs/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=D:/ESP32_Projects/esp32-atgs/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=D:/ESP32_Projects/esp32-atgs/sdkconfig IDF_TARGET=esp32 IDF_ENV_FPGA= C:/esp/tools/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe -m menuconfig C:/esp/esp-idf/Kconfig && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --env IDF_TARGET=esp32 --env IDF_ENV_FPGA= --output config D:/ESP32_Projects/esp32-atgs/sdkconfig"
   pool = console
 
 
@@ -184,7 +184,7 @@ build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTO
 # Custom command for CMakeFiles\confserver
 
 build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confserver.py --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confserver.py --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig"
   pool = console
 
 
@@ -192,7 +192,7 @@ build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTO
 # Custom command for CMakeFiles\save-defconfig
 
 build CMakeFiles/save-defconfig | ${cmake_ninja_workdir}CMakeFiles/save-defconfig: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --dont-write-deprecated --output savedefconfig C:/esp/esp-idf/components/bootloader/subproject/sdkconfig.defaults"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/kconfig_new/confgen.py --list-separator=semicolon --kconfig C:/esp/esp-idf/Kconfig --sdkconfig-rename C:/esp/esp-idf/sdkconfig.rename --config D:/ESP32_Projects/esp32-atgs/sdkconfig --env-file D:/ESP32_Projects/esp32-atgs/build/bootloader/config.env --dont-write-deprecated --output savedefconfig C:/esp/esp-idf/components/bootloader/subproject/sdkconfig.defaults"
   pool = console
 
 
@@ -206,7 +206,7 @@ build CMakeFiles/gen_project_binary | ${cmake_ninja_workdir}CMakeFiles/gen_proje
 # Custom command for .bin_timestamp
 
 build .bin_timestamp | ${cmake_ninja_workdir}.bin_timestamp: CUSTOM_COMMAND bootloader.elf || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_app_format/libesp_app_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/xtensa/libxtensa.a
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 elf2image --flash_mode dio --flash_freq 40m --flash_size 4MB --min-rev-full 0 --max-rev-full 399 -o D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.elf && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E echo "Generated D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin" && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E md5sum D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin > D:/ESP32_Projects/esp32-atgs/build/bootloader/.bin_timestamp"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 elf2image --flash_mode dio --flash_freq 40m --flash_size 4MB --min-rev-full 0 --max-rev-full 399 -o D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.elf && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E echo "Generated D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin" && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -E md5sum D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin > D:/ESP32_Projects/esp32-atgs/build/bootloader/.bin_timestamp"
   DESC = Generating binary image from built executable
   restat = 1
 
@@ -221,7 +221,7 @@ build CMakeFiles/app | ${cmake_ninja_workdir}CMakeFiles/app: phony || _project_e
 # Custom command for CMakeFiles\erase_flash
 
 build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\esp\esp-idf\components\esptool_py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/esp-idf -D SERIAL_TOOL=c:/esp/tools/Espressif/python_env/idf5.0_py3.8_env/Scripts/python.exe;;C:/esp/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\esp\esp-idf\components\esptool_py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/esp-idf -D SERIAL_TOOL=C:/esp/tools/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe;;C:/esp/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake"
   pool = console
 
 
@@ -229,7 +229,7 @@ build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUS
 # Custom command for CMakeFiles\monitor
 
 build CMakeFiles/monitor | ${cmake_ninja_workdir}CMakeFiles/monitor: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\esp\esp-idf\components\esptool_py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/esp-idf -D SERIAL_TOOL=c:/esp/tools/Espressif/python_env/idf5.0_py3.8_env/Scripts/python.exe;C:/esp/esp-idf/tools/idf_monitor.py -D SERIAL_TOOL_ARGS=--target;esp32;--revision;0;D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.elf -D WORKING_DIRECTORY=D:/ESP32_Projects/esp32-atgs/build/bootloader -P run_serial_tool.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\esp\esp-idf\components\esptool_py && C:\esp\tools\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/esp-idf -D SERIAL_TOOL=C:/esp/tools/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe;C:/esp/esp-idf/tools/idf_monitor.py -D SERIAL_TOOL_ARGS=--target;esp32;--revision;0;D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.elf -D WORKING_DIRECTORY=D:/ESP32_Projects/esp32-atgs/build/bootloader -P run_serial_tool.cmake"
   pool = console
 
 
@@ -252,28 +252,28 @@ build project_elf_src_esp32.c | ${cmake_ninja_workdir}project_elf_src_esp32.c: C
 # Custom command for CMakeFiles\size
 
 build CMakeFiles/size | ${cmake_ninja_workdir}CMakeFiles/size: CUSTOM_COMMAND bootloader.map
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
 
 
 #############################################
 # Custom command for CMakeFiles\size-files
 
 build CMakeFiles/size-files | ${cmake_ninja_workdir}CMakeFiles/size-files: CUSTOM_COMMAND bootloader.map
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py --files D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py --files D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
 
 
 #############################################
 # Custom command for CMakeFiles\size-components
 
 build CMakeFiles/size-components | ${cmake_ninja_workdir}CMakeFiles/size-components: CUSTOM_COMMAND bootloader.map
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py --archives D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py --archives D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.map"
 
 
 #############################################
 # Custom command for CMakeFiles\uf2-app
 
 build CMakeFiles/uf2-app | ${cmake_ninja_workdir}CMakeFiles/uf2-app: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_app_format/libesp_app_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/mkuf2.py write -o D:/ESP32_Projects/esp32-atgs/build/bootloader/uf2-app.bin --json D:/ESP32_Projects/esp32-atgs/build/bootloader/flasher_args.json --chip-id 0x1c5f21b0 --bin app"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/mkuf2.py write -o D:/ESP32_Projects/esp32-atgs/build/bootloader/uf2-app.bin --json D:/ESP32_Projects/esp32-atgs/build/bootloader/flasher_args.json --chip-id 0x1c5f21b0 --bin app"
   pool = console
 
 
@@ -281,7 +281,7 @@ build CMakeFiles/uf2-app | ${cmake_ninja_workdir}CMakeFiles/uf2-app: CUSTOM_COMM
 # Custom command for CMakeFiles\uf2
 
 build CMakeFiles/uf2 | ${cmake_ninja_workdir}CMakeFiles/uf2: CUSTOM_COMMAND bootloader || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_app_format/libesp_app_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/mkuf2.py write -o D:/ESP32_Projects/esp32-atgs/build/bootloader/uf2.bin --json D:/ESP32_Projects/esp32-atgs/build/bootloader/flasher_args.json --chip-id 0x1c5f21b0"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/tools/mkuf2.py write -o D:/ESP32_Projects/esp32-atgs/build/bootloader/uf2.bin --json D:/ESP32_Projects/esp32-atgs/build/bootloader/flasher_args.json --chip-id 0x1c5f21b0"
   pool = console
 
 # =============================================================================
@@ -1313,7 +1313,7 @@ build esp-idf/efuse/rebuild_cache: phony esp-idf/efuse/CMakeFiles/rebuild_cache.
 # Custom command for esp-idf\efuse\CMakeFiles\efuse-common-table
 
 build esp-idf/efuse/CMakeFiles/efuse-common-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse-common-table: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192"
 
 
 #############################################
@@ -1336,7 +1336,7 @@ build esp-idf/efuse/CMakeFiles/efuse_custom_table | ${cmake_ninja_workdir}esp-id
 # Custom command for esp-idf\efuse\CMakeFiles\show-efuse-table
 
 build esp-idf/efuse/CMakeFiles/show-efuse-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/show-efuse-table: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192 --info"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/esp32/esp_efuse_table.csv -t esp32 --max_blk_len 192 --info"
 
 
 #############################################
@@ -1351,7 +1351,7 @@ build esp-idf/efuse/CMakeFiles/show_efuse_table | ${cmake_ninja_workdir}esp-idf/
 # Custom command for esp-idf\efuse\CMakeFiles\efuse_test_table
 
 build esp-idf/efuse/CMakeFiles/efuse_test_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse_test_table: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32 --max_blk_len 192"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\efuse && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/components/efuse/efuse_table_gen.py C:/esp/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32 --max_blk_len 192"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -1860,7 +1860,7 @@ build esp-idf/esptool_py/rebuild_cache: phony esp-idf/esptool_py/CMakeFiles/rebu
 # Custom command for esp-idf\esptool_py\CMakeFiles\bootloader_check_size
 
 build esp-idf/esptool_py/CMakeFiles/bootloader_check_size | ${cmake_ninja_workdir}esp-idf/esptool_py/CMakeFiles/bootloader_check_size: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_app_format/libesp_app_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\esptool_py && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin"
+  COMMAND = cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\esptool_py && C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:

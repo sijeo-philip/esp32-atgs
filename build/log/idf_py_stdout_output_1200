@@ -1,0 +1,34 @@
+[0/1] Re-running CMake...
+-- Component directory D:/ESP32_Projects/esp32-atgs/components/wifi does not contain a CMakeLists.txt file. No component will be added
+-- ccache will be used for faster recompilation
+-- Building ESP-IDF components for target esp32
+Processing 1 dependencies:
+[1/1] idf (5.0.2)
+-- Project sdkconfig file D:/ESP32_Projects/esp32-atgs/sdkconfig
+-- App "ESP32_CAM_ATGS" version: 95f381b-dirty
+-- Adding linker script D:/ESP32_Projects/esp32-atgs/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_system/ld/esp32/sections.ld.in
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.api.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.libgcc.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-data.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.syscalls.ld
+-- Adding linker script C:/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-funcs.ld
+-- Adding linker script C:/esp/esp-idf/components/soc/esp32/ld/esp32.peripherals.ld
+-- Components: app_trace app_update bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp32-camera esp_adc esp_app_format esp_common esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_local_ctrl esp_netif esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_system esp_timer esp_wifi espcoredump esptool_py fatfs freertos hal heap http_parser idf_test ieee802154 json log lwip main mbedtls mdns mqtt newlib nvs_flash openthread partition_table perfmon protobuf-c protocomm pthread sdmmc soc spi_flash spiffs tcp_transport ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant xtensa
+-- Component paths: C:/esp/esp-idf/components/app_trace C:/esp/esp-idf/components/app_update C:/esp/esp-idf/components/bootloader C:/esp/esp-idf/components/bootloader_support C:/esp/esp-idf/components/bt C:/esp/esp-idf/components/cmock C:/esp/esp-idf/components/console C:/esp/esp-idf/components/cxx C:/esp/esp-idf/components/driver C:/esp/esp-idf/components/efuse C:/esp/esp-idf/components/esp-tls C:/esp/esp-idf/components/esp32-camera C:/esp/esp-idf/components/esp_adc C:/esp/esp-idf/components/esp_app_format C:/esp/esp-idf/components/esp_common C:/esp/esp-idf/components/esp_eth C:/esp/esp-idf/components/esp_event C:/esp/esp-idf/components/esp_gdbstub C:/esp/esp-idf/components/esp_hid C:/esp/esp-idf/components/esp_http_client C:/esp/esp-idf/components/esp_http_server C:/esp/esp-idf/components/esp_https_ota C:/esp/esp-idf/components/esp_https_server C:/esp/esp-idf/components/esp_hw_support C:/esp/esp-idf/components/esp_lcd C:/esp/esp-idf/components/esp_local_ctrl C:/esp/esp-idf/components/esp_netif C:/esp/esp-idf/components/esp_partition C:/esp/esp-idf/components/esp_phy C:/esp/esp-idf/components/esp_pm C:/esp/esp-idf/components/esp_psram C:/esp/esp-idf/components/esp_ringbuf C:/esp/esp-idf/components/esp_rom C:/esp/esp-idf/components/esp_system C:/esp/esp-idf/components/esp_timer C:/esp/esp-idf/components/esp_wifi C:/esp/esp-idf/components/espcoredump C:/esp/esp-idf/components/esptool_py C:/esp/esp-idf/components/fatfs C:/esp/esp-idf/components/freertos C:/esp/esp-idf/components/hal C:/esp/esp-idf/components/heap C:/esp/esp-idf/components/http_parser C:/esp/esp-idf/components/idf_test C:/esp/esp-idf/components/ieee802154 C:/esp/esp-idf/components/json C:/esp/esp-idf/components/log C:/esp/esp-idf/components/lwip D:/ESP32_Projects/esp32-atgs/main C:/esp/esp-idf/components/mbedtls C:/esp/esp-idf/components/mdns C:/esp/esp-idf/components/mqtt C:/esp/esp-idf/components/newlib C:/esp/esp-idf/components/nvs_flash C:/esp/esp-idf/components/openthread C:/esp/esp-idf/components/partition_table C:/esp/esp-idf/components/perfmon C:/esp/esp-idf/components/protobuf-c C:/esp/esp-idf/components/protocomm C:/esp/esp-idf/components/pthread C:/esp/esp-idf/components/sdmmc C:/esp/esp-idf/components/soc C:/esp/esp-idf/components/spi_flash C:/esp/esp-idf/components/spiffs C:/esp/esp-idf/components/tcp_transport C:/esp/esp-idf/components/ulp C:/esp/esp-idf/components/unity C:/esp/esp-idf/components/usb C:/esp/esp-idf/components/vfs C:/esp/esp-idf/components/wear_levelling C:/esp/esp-idf/components/wifi_provisioning C:/esp/esp-idf/components/wpa_supplicant C:/esp/esp-idf/components/xtensa
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/ESP32_Projects/esp32-atgs/build
+[1/9] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build\bootloader\esp-idf\esptool_py && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/ESP32_Projects/esp32-atgs/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6760 bytes. 0x8a0 bytes (8%) free.
+[2/7] Building C object esp-idf/esp_app_format/CMakeFiles/__idf_esp_app_format.dir/esp_app_desc.c.obj
+[3/7] Linking C static library esp-idf\esp_app_format\libesp_app_format.a
+[4/7] Generating ld/sections.ld
+[5/7] Linking CXX executable ESP32_CAM_ATGS.elf
+FAILED: ESP32_CAM_ATGS.elf 
+cmd.exe /C "cd . && C:\esp\tools\Espressif\tools\xtensa-esp32-elf\esp-2022r1-11.2.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-g++.exe -mlongcalls -Wno-frame-address  @CMakeFiles\ESP32_CAM_ATGS.elf.rsp -o ESP32_CAM_ATGS.elf  && cd ."
+c:/esp/tools/espressif/tools/xtensa-esp32-elf/esp-2022r1-11.2.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/11.2.0/../../../../xtensa-esp32-elf/bin/ld.exe: esp-idf/main/libmain.a(connect.c.obj):D:/ESP32_Projects/esp32-atgs/main/connect.c:23: multiple definition of `connectionSemaphore'; esp-idf/main/libmain.a(main.c.obj):D:/ESP32_Projects/esp32-atgs/main/main.c:25: first defined here
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.

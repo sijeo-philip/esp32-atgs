@@ -20,7 +20,7 @@ static esp_netif_t *sta_netif;
 static esp_netif_t *ap_netif;
 static bool connection_status = false;
 
-SemaphoreHandle_t connectionSemaphore;
+extern SemaphoreHandle_t connectionSemaphore;
 
 static char *print_disconnection_error(wifi_err_reason_t reason)
 {
@@ -218,7 +218,7 @@ esp_err_t wifi_connect_sta( wifi_config_t *p_wifiConfig){
     strncpy((char*)set_wifi_config->sta.password, (char*)p_wifiConfig->sta.password, sizeof(p_wifiConfig->sta.password));
     set_wifi_config->sta.threshold.authmode =  p_wifiConfig->sta.threshold.authmode;
         
-    err = esp_wifi_set_config(WIFI_IF_STA, &set_wifi_config);
+    err = esp_wifi_set_config(WIFI_IF_STA, set_wifi_config);
     free(set_wifi_config);
        
    
