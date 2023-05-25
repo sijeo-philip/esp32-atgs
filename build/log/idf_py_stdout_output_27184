@@ -1,0 +1,12 @@
+[1/1] cmd.exe /C "cd /D D:\ESP32_Projects\esp32-atgs\build && c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/esp/esp-idf/tools/idf_size.py D:/ESP32_Projects/esp32-atgs/build/ESP32_CAM_ATGS.map"
+Total sizes:
+Used static DRAM:   25560 bytes ( 155176 remain, 14.1% used)
+      .data size:   18648 bytes
+      .bss  size:    6912 bytes
+Used static IRAM:  106022 bytes (  25050 remain, 80.9% used)
+      .text size:  104995 bytes
+   .vectors size:    1027 bytes
+Used Flash size :  854732 bytes
+      .text     :  668955 bytes
+      .rodata   :  185521 bytes
+Total image size:  979402 bytes (.bin may be padded larger)

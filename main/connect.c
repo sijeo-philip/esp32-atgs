@@ -3,6 +3,7 @@
 #include "esp_netif.h"
 #include "esp_wifi.h"
 #include "esp_log.h"
+#include "esp_http_server.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -19,8 +20,10 @@ const int DISCONNECTED = BIT1;
 static esp_netif_t *sta_netif;
 static esp_netif_t *ap_netif;
 static bool connection_status = false;
+static uint8_t disconnect_count = 0;
 
 extern SemaphoreHandle_t connectionSemaphore;
+extern httpd_handle_t server;
 
 static char *print_disconnection_error(wifi_err_reason_t reason)
 {
@@ -114,7 +117,16 @@ static void event_handler(void* arg, esp_event_base_t eventBase, int32_t eventID
                 //from wifi_err_reason_t
                 ESP_LOGW("WIFI", "Disconnected code %d: %s\n", wifi_event_sta_disconnected->reason,
                                  print_disconnection_error(wifi_event_sta_disconnected->reason));
-                if ( wifi_event_sta_disconnected->reason != WIFI_REASON_ASSOC_LEAVE)
+                disconnect_count = disconnect_count + 1;
+                ESP_LOGI("CONNECT", "Disconnects in count %d", disconnect_count);
+                if(disconnect_count > 5)
+                {
+                    ESP_ERROR_CHECK(nvs_flash_erase());
+                    wifi_disconnect();
+                    disconnect_count = 0;
+                    xSemaphoreGiveFromISR(initSemaphore, pdFALSE);
+                }
+                else
                 {
                     esp_wifi_connect();
                     break;
@@ -228,8 +240,8 @@ return err;
 void wifi_connect_ap( const char* ssid, const char* pass ){
     wifi_config_t wifi_config;
     memset(&wifi_config, 0, sizeof(wifi_config_t));
-    strncpy((char *)wifi_config.ap.ssid, ssid, sizeof(wifi_config.sta.ssid) - 1);
-    strncpy((char *)wifi_config.ap.password, pass, sizeof(wifi_config.sta.password) - 1);
+    strncpy((char *)wifi_config.ap.ssid, ssid, strlen(ssid));
+    strncpy((char *)wifi_config.ap.password, pass, strlen(pass));
     wifi_config.ap.authmode = WIFI_AUTH_WPA_WPA2_PSK;
     wifi_config.ap.max_connection = 4;
     wifi_config.ap.beacon_interval = 100;
@@ -242,6 +254,7 @@ void wifi_connect_ap( const char* ssid, const char* pass ){
 void wifi_disconnect( void ){
     ESP_LOGI(WIFI_TAG, "**********DISCONNECTING*********");
     esp_wifi_disconnect();
+    httpd_stop(server);
     esp_wifi_stop();
     ESP_LOGI(WIFI_TAG, "***********DISCONNECTING COMPLETE*********");
 
@@ -250,8 +263,7 @@ void wifi_disconnect( void ){
 
 void wifi_init(void *params)
 {
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_netif_init());
+     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     while(true)
     {
@@ -297,12 +309,15 @@ void wifi_init(void *params)
                 }
 
             }
+            
             if( ( connection_status == true) && (err == ESP_OK) )
             {
                 ESP_ERROR_CHECK(esp_wifi_start());
 
             }
             else{
+                wifi_init_config_t wifi_config = WIFI_INIT_CONFIG_DEFAULT();
+                ESP_ERROR_CHECK(esp_wifi_init(&wifi_config));
                 wifi_connect_ap("TARGET_SYSTEM","nopassword");
                 ESP_ERROR_CHECK(esp_wifi_start());
             }

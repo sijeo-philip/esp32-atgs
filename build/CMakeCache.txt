@@ -559,7 +559,7 @@ C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS:INTERNAL=1
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[C:/esp/tools/Espressif/tools/idf-git/2.30.1/cmd/git.exe][v2.30.1.windows.1()]
 //Details about finding Python3
-FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[C:/esp/tools/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe][cfound components: Interpreter ][v3.11.2()]
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[c:/esp/tools/Espressif/python_env/idf5.0_py3.8_env/Scripts/python.exe][cfound components: Interpreter ][v3.8.7()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
 //Have include stddef.h
@@ -574,8 +574,8 @@ HAVE_TIME_T_SIZE:INTERNAL=TRUE
 TIME_T_SIZE:INTERNAL=8
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/ESP32_CAM_ATGS
-_Python3_EXECUTABLE:INTERNAL=C:/esp/tools/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe
+_Python3_EXECUTABLE:INTERNAL=c:/esp/tools/Espressif/python_env/idf5.0_py3.8_env/Scripts/python.exe
 //Python3 Properties
-_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;2;32;;;C:\esp\tools\Espressif\tools\idf-python\3.11.2\Lib;C:\esp\tools\Espressif\tools\idf-python\3.11.2\Lib;C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Lib\site-packages;C:\esp\tools\Espressif\python_env\idf5.0_py3.11_env\Lib\site-packages
-_Python3_INTERPRETER_SIGNATURE:INTERNAL=e1798559466c2ca50e51f81ec4587366
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;8;7;32;;;c:\esp\tools\Espressif\tools\idf-python\3.8.7\Lib;c:\esp\tools\Espressif\tools\idf-python\3.8.7\Lib;c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Lib\site-packages;c:\esp\tools\Espressif\python_env\idf5.0_py3.8_env\Lib\site-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=c10f440e42075d3fab65ee22ad4dd809
 

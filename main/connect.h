@@ -47,6 +47,7 @@
 #endif
 
 void wifi_init(void *params);
+void wifi_disconnect(void);
 extern SemaphoreHandle_t initSemaphore;
 
 #endif

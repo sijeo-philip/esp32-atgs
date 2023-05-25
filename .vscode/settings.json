@@ -25,6 +25,7 @@
         "mdns.h": "c",
         "cjson.h": "c",
         "esp_camera.h": "c",
-        "esp_intr_alloc.h": "c"
+        "esp_intr_alloc.h": "c",
+        "nvs_flash.h": "c"
     }
 }

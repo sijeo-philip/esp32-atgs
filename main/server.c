@@ -15,7 +15,7 @@
 
 
 static int client_session_id;
-static httpd_handle_t server = NULL;
+httpd_handle_t server = NULL;
 
 
 void reset_wifi( void* params)
@@ -108,7 +108,7 @@ static esp_err_t on_post_wifi_config(httpd_req_t *req)
     if( cJSON_IsString(ssid) && (ssid->valuestring !=NULL))
     {
         strncpy((char*)wifiConfigSet->sta.ssid, ssid->valuestring, strlen(ssid->valuestring));
-        ESP_LOGI(TAG, "SSID : %s", ssid->string);
+        ESP_LOGI(TAG, "SSID : %s", ssid->valuestring);
     }
     cJSON *password = cJSON_GetObjectItem(payload, "pass");
     if( cJSON_IsString(password) && ( password->valuestring != NULL) )

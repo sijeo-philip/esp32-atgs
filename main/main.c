@@ -102,6 +102,7 @@ void app_main(void)
 {
   esp_log_level_set(TAG, ESP_LOG_DEBUG);
   connectionSemaphore = xSemaphoreCreateBinary();
+  initSemaphore = xSemaphoreCreateBinary();
   initialize_nvs();
  
    
@@ -133,7 +134,8 @@ printf("------------------------------------------------------------------\n");
 button_init();
 camera_init();
 xTaskCreate(&wifi_init, "init comms", 1024*3, NULL, 10, NULL);
+printf("Task1 Created\n");
 xSemaphoreGive(initSemaphore);
-xTaskCreate(&on_connect, "handle comms", 1024*5, NULL, 5, NULL);
-
+xTaskCreate(&on_connect, "handle comms", 1024*3, NULL, 5, NULL);
+printf("Task2 Created\n");
 }
