@@ -137,6 +137,7 @@ static esp_err_t on_post_wifi_config(httpd_req_t *req)
     httpd_resp_send(req, NULL, 0);
     xTaskCreate(reset_wifi, "reset wifi", 1024*2, NULL, 15, NULL);
     return 0;
+    
 }
 
 static esp_err_t on_capture_web_socket_url(httpd_req_t *req)
